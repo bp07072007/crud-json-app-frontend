@@ -18,8 +18,13 @@ import { useNavigate, useParams, Link } from "react-router-dom";
 import React, { useState, useEffect } from "react";
 import { useNavigate, useParams, Link } from "react-router-dom";
 
+
+import React, { useState, useEffect } from "react";
+import { useNavigate, useParams, Link } from "react-router-dom";
+
 import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
+
 
 
 
@@ -54,9 +59,15 @@ import {
   AddNewContactAction,
   EditContactAction,
 
+
+  LoadDataSingleEdit,
+  AddNewContactAction,
+  EditContactAction,
+
   
   AddNewContactAction,
   
+
 
 
 
@@ -112,11 +123,13 @@ const AddEdit = () => {
 
 
 
+
       
         // API for adding the contact information into database
         AddNewContactAction(cname, email, contact);
         setState(initialState);
       
+
 
 
 
@@ -175,6 +188,10 @@ const AddEdit = () => {
         <input type="submit" value={id ? "Update" : "Save"} />
 
 
+        />
+        <input type="submit" value={id ? "Update" : "Save"} />
+
+
         <input type="submit" value={id ? "Update" : "Save"} />
 
 
@@ -187,6 +204,7 @@ const AddEdit = () => {
         <input type="submit" value={id ? "Update" : "Save"} />
 
         <input type="submit" value={"Save"} />
+
 
 
 

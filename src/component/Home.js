@@ -15,6 +15,10 @@ import {
   ChangeStatusUtility,
 
 
+  ChangeStatusUtility,
+
+
+
 
 } from "../utils/ActionUtility.js";
 
@@ -47,6 +51,10 @@ const Home = () => {
   // Method for change the status
 
 
+
+  // Method for change the status
+
+
   // Method for change the status
 
   const changeStatus = (id, sendStatus) => {
@@ -56,6 +64,7 @@ const Home = () => {
 
 
   let LoopData = "";
+
 
 
   const changeStatus = (id, sendStatus) => {
@@ -89,7 +98,11 @@ const Home = () => {
 
           style={{ float: "left", marginLeft: "21%" }}
 
+
+          style={{ float: "left", marginLeft: "21%" }}
+
           style={{ float: "left", marginLeft: "16%" }}
+
 
         >
           Add Contact
@@ -106,7 +119,6 @@ const Home = () => {
         <option value="0">Not Completed</option>
         <option value="1">Completed</option>
       </select>
-
 
       <table className="styled-table">
         <thead>
@@ -155,6 +167,12 @@ const Home = () => {
                   <Link to={`/view/${item.id}`}>
                     <button className="btn btn-view">View</button>
                   </Link>
+
+
+                  <Link to={`/view/${item.id}`}>
+                    <button className="btn btn-view">View</button>
+                  </Link>
+
 
 
                 </td>
