@@ -5,6 +5,9 @@ import "./styles/Home.css";
 import {
   ContactDataList,
   DeleteContactRecord,
+
+  ChangeStatusUtility,
+
 } from "../utils/ActionUtility.js";
 
 const Home = () => {
@@ -30,6 +33,16 @@ const Home = () => {
       setTimeout(() => loadData(), 500);
     }
   };
+
+
+  // Method for change the status
+
+  const changeStatus = (id, sendStatus) => {
+    ChangeStatusUtility(id, sendStatus);
+    setTimeout(() => loadData(), 50);
+  };
+
+
   let LoopData = "";
 
   LoopData = data;
@@ -74,6 +87,13 @@ const Home = () => {
                     onClick={() => deleteContact(item.id)}
                   >
                     Delete
+                  </button>
+
+                  <button
+                    className="btn btn-edit"
+                    onClick={() => changeStatus(item.id, item.cstatus)}
+                  >
+                    Change Status
                   </button>
 
                 </td>
