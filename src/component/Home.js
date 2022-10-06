@@ -8,6 +8,10 @@ import {
 
   ChangeStatusUtility,
 
+
+  ChangeStatusUtility,
+
+
 } from "../utils/ActionUtility.js";
 
 const Home = () => {
@@ -95,6 +99,10 @@ const Home = () => {
                   >
                     Change Status
                   </button>
+
+                  <Link to={`/view/${item.id}`}>
+                    <button className="btn btn-view">View</button>
+                  </Link>
 
                 </td>
               </tr>

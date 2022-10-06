@@ -75,5 +75,17 @@ export const ChangeStatusUtility = (id, sendStatus) => {
 };
 
 
+// Function for information of List of contact
+
+export const LoadDataSingleContact = async (id) => {
+  const resp = await axios.get(
+    `${process.env.REACT_APP_SERVER_PATH}/api/view/${id}`
+  );
+
+  return resp.data.data.Contact;
+};
+
+
+
 
 
