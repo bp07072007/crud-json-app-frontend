@@ -52,3 +52,12 @@ export const LoadDataSingleEdit = async (id) => {
 };
 
 
+// Deleting the contact from database
+
+export const DeleteContactRecord = (id) => {
+  axios.delete(`${process.env.REACT_APP_SERVER_PATH}/api/delete/${id}`);
+  toast.success("Contact deleted succesfully");
+};
+
+
+

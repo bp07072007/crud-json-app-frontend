@@ -2,7 +2,10 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "./styles/Home.css";
 
-import { ContactDataList } from "../utils/ActionUtility.js";
+import {
+  ContactDataList,
+  DeleteContactRecord,
+} from "../utils/ActionUtility.js";
 
 const Home = () => {
   // Define the useSate
@@ -19,6 +22,14 @@ const Home = () => {
     loadData();
   }, []);
 
+  // Deleting the contact from database
+
+  const deleteContact = (id) => {
+    if (window.confirm("Are you sure to delete the contact ?")) {
+      DeleteContactRecord(id);
+      setTimeout(() => loadData(), 500);
+    }
+  };
   let LoopData = "";
 
   LoopData = data;
@@ -57,6 +68,14 @@ const Home = () => {
                   <Link to={`/update/${item.id}`}>
                     <button className="btn btn-edit">Edit</button>
                   </Link>
+
+                  <button
+                    className="btn btn-delete"
+                    onClick={() => deleteContact(item.id)}
+                  >
+                    Delete
+                  </button>
+
                 </td>
               </tr>
             );

@@ -16,6 +16,10 @@ function App() {
 
           <Route path="/update/:id" element={<AddEdit />} />
 
+
+          <Route path="/update/:id" element={<AddEdit />} />
+
+
         </Routes>
       </div>
     </Router>
