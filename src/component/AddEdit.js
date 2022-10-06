@@ -1,12 +1,34 @@
+
 import React, { useState, useEffect } from "react";
 import { useNavigate, useParams, Link } from "react-router-dom";
+
+
+import React, { useState, useEffect } from "react";
+import { useNavigate, useParams, Link } from "react-router-dom";
+
+import React, { useState } from "react";
+import { useNavigate, Link } from "react-router-dom";
+
+
 import "./styles/AddEdit.css";
 import { toast } from "react-toastify";
 
 import {
+
   LoadDataSingleEdit,
   AddNewContactAction,
   EditContactAction,
+
+
+  LoadDataSingleEdit,
+  AddNewContactAction,
+  EditContactAction,
+
+  
+  AddNewContactAction,
+  
+
+
 } from "../utils/ActionUtility.js";
 import { initialState } from "../utils/InitialState.js";
 
@@ -17,6 +39,7 @@ const AddEdit = () => {
   const [state, setState] = useState(initialState);
   const { cname, email, contact } = state;
   const navigate = useNavigate();
+
 
   const { id } = useParams();
 
@@ -31,6 +54,7 @@ const AddEdit = () => {
     DataSingleEdit(id);
   }, [id]);
 
+
   // Add the contact information after submitting below
 
   const handleSubmit = (e) => {
@@ -39,6 +63,7 @@ const AddEdit = () => {
     if (!cname || !email || !contact) {
       toast.error("Please provide value into each input field");
     } else {
+
       if (!id) {
         // API for adding the contact information into database
         AddNewContactAction(cname, email, contact);
@@ -49,6 +74,15 @@ const AddEdit = () => {
         EditContactAction(id, cname, email, contact);
         setState(initialState);
       }
+
+
+      
+        // API for adding the contact information into database
+        AddNewContactAction(cname, email, contact);
+        setState(initialState);
+      
+
+
       // After submission the URL redirect to listing contact page
       setTimeout(() => navigate("/"), 50);
     }
@@ -98,7 +132,15 @@ const AddEdit = () => {
           value={contact || ""}
           onChange={handleInputChange}
         />
+
         <input type="submit" value={id ? "Update" : "Save"} />
+
+
+        <input type="submit" value={id ? "Update" : "Save"} />
+
+        <input type="submit" value={"Save"} />
+
+
         <Link to="/">
           <input type="button" value="Go Back" />
         </Link>

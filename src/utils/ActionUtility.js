@@ -25,6 +25,7 @@ export const AddNewContactAction = async (cname, email, contact) => {
   toast.success("Contact added successfully");
 };
 
+
 // API fro Updating the contact information into database
 
 export const EditContactAction = async (id, cname, email, contact) => {
@@ -50,9 +51,13 @@ export const LoadDataSingleEdit = async (id) => {
   return resp.data.data;
 };
 
+
 // Deleting the contact from database
 
 export const DeleteContactRecord = (id) => {
   axios.delete(`${process.env.REACT_APP_SERVER_PATH}/api/delete/${id}`);
   toast.success("Contact deleted succesfully");
 };
+
+
+

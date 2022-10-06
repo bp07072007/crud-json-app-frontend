@@ -68,12 +68,14 @@ const Home = () => {
                   <Link to={`/update/${item.id}`}>
                     <button className="btn btn-edit">Edit</button>
                   </Link>
+
                   <button
                     className="btn btn-delete"
                     onClick={() => deleteContact(item.id)}
                   >
                     Delete
                   </button>
+
                 </td>
               </tr>
             );
