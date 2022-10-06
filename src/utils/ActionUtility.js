@@ -24,3 +24,31 @@ export const AddNewContactAction = async (cname, email, contact) => {
     .catch((err) => toast.error(err.response.data));
   toast.success("Contact added successfully");
 };
+
+
+// API fro Updating the contact information into database
+
+export const EditContactAction = async (id, cname, email, contact) => {
+  await axios
+    .put(`${process.env.REACT_APP_SERVER_PATH}/api/update`, {
+      id,
+      cname,
+      email,
+      contact,
+    })
+    .then(() => {})
+    .catch((err) => toast.error(err.response.data));
+  toast.success("Contact updated successfully");
+};
+
+// Fetch the information of particular ID contact
+
+export const LoadDataSingleEdit = async (id) => {
+  const resp = await axios.get(
+    `${process.env.REACT_APP_SERVER_PATH}/api/singleget/${id}`
+  );
+
+  return resp.data.data;
+};
+
+

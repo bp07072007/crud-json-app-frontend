@@ -1,12 +1,23 @@
+
+import React, { useState, useEffect } from "react";
+import { useNavigate, useParams, Link } from "react-router-dom";
+
 import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
+
 import "./styles/AddEdit.css";
 import { toast } from "react-toastify";
 
 import {
+
+  LoadDataSingleEdit,
+  AddNewContactAction,
+  EditContactAction,
+
   
   AddNewContactAction,
   
+
 } from "../utils/ActionUtility.js";
 import { initialState } from "../utils/InitialState.js";
 
@@ -19,8 +30,22 @@ const AddEdit = () => {
   const navigate = useNavigate();
 
 
+  const { id } = useParams();
 
- 
+  // Function for setting the partucular contact detail
+  const DataSingleEdit = async (id) => {
+    const response = await LoadDataSingleEdit(id);
+    setState(response);
+  };
+
+  // Fetch the information of particular ID contact
+  useEffect(() => {
+    DataSingleEdit(id);
+  }, [id]);
+
+
+
+
   // Add the contact information after submitting below
 
   const handleSubmit = (e) => {
@@ -29,6 +54,18 @@ const AddEdit = () => {
     if (!cname || !email || !contact) {
       toast.error("Please provide value into each input field");
     } else {
+
+      if (!id) {
+        // API for adding the contact information into database
+        AddNewContactAction(cname, email, contact);
+        setState(initialState);
+      } else {
+        // API fro Updating the contact information into database
+
+        EditContactAction(id, cname, email, contact);
+        setState(initialState);
+      }
+
       
         // API for adding the contact information into database
         AddNewContactAction(cname, email, contact);
@@ -84,7 +121,11 @@ const AddEdit = () => {
           value={contact || ""}
           onChange={handleInputChange}
         />
+
+        <input type="submit" value={id ? "Update" : "Save"} />
+
         <input type="submit" value={"Save"} />
+
         <Link to="/">
           <input type="button" value="Go Back" />
         </Link>
