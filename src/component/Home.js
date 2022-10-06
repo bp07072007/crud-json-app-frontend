@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-
+import { Link } from "react-router-dom";
 import "./styles/Home.css";
 
 import { ContactDataList } from "../utils/ActionUtility.js";
@@ -25,6 +25,14 @@ const Home = () => {
 
   return (
     <div style={{ marginTop: "50px" }}>
+      <Link to="/addcontact">
+        <button
+          className="btn btn-contact"
+          style={{ float: "left", marginLeft: "16%" }}
+        >
+          Add Contact
+        </button>
+      </Link>
       <table className="styled-table">
         <thead>
           <tr>
