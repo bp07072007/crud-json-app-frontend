@@ -25,6 +25,7 @@ export const AddNewContactAction = async (cname, email, contact) => {
   toast.success("Contact added successfully");
 };
 
+
 // API fro Updating the contact information into database
 
 export const EditContactAction = async (id, cname, email, contact) => {
@@ -49,3 +50,5 @@ export const LoadDataSingleEdit = async (id) => {
 
   return resp.data.data;
 };
+
+
