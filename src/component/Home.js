@@ -41,6 +41,7 @@ const Home = () => {
             <th style={{ textAlign: "center" }}>Email</th>
             <th style={{ textAlign: "center" }}>Contact</th>
             <th style={{ textAlign: "center" }}>status</th>
+            <th style={{ textAlign: "center" }}>Action</th>
           </tr>
         </thead>
         <tbody>
@@ -52,6 +53,11 @@ const Home = () => {
                 <td>{item.email}</td>
                 <td>{item.contact}</td>
                 <td>{item.cstatus === 0 ? "Not Completed" : "Completed"}</td>
+                <td>
+                  <Link to={`/update/${item.id}`}>
+                    <button className="btn btn-edit">Edit</button>
+                  </Link>
+                </td>
               </tr>
             );
           })}
