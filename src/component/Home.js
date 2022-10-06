@@ -5,7 +5,17 @@ import "./styles/Home.css";
 import {
   ContactDataList,
   DeleteContactRecord,
+
   ChangeStatusUtility,
+
+
+  ChangeStatusUtility,
+
+
+  ChangeStatusUtility,
+
+
+
 } from "../utils/ActionUtility.js";
 
 const Home = () => {
@@ -33,7 +43,20 @@ const Home = () => {
     }
   };
 
+
   // Method for change the status
+
+
+  // Method for change the status
+
+  const changeStatus = (id, sendStatus) => {
+    ChangeStatusUtility(id, sendStatus);
+    setTimeout(() => loadData(), 50);
+  };
+
+
+  let LoopData = "";
+
 
   const changeStatus = (id, sendStatus) => {
     ChangeStatusUtility(id, sendStatus);
@@ -63,11 +86,16 @@ const Home = () => {
       <Link to="/addcontact">
         <button
           className="btn btn-contact"
+
           style={{ float: "left", marginLeft: "21%" }}
+
+          style={{ float: "left", marginLeft: "16%" }}
+
         >
           Add Contact
         </button>
       </Link>
+
       <label htmlFor="changestatusFilter">Status Filter</label>
       <select
         id="changestatusFilter"
@@ -78,6 +106,8 @@ const Home = () => {
         <option value="0">Not Completed</option>
         <option value="1">Completed</option>
       </select>
+
+
       <table className="styled-table">
         <thead>
           <tr>
@@ -102,21 +132,31 @@ const Home = () => {
                   <Link to={`/update/${item.id}`}>
                     <button className="btn btn-edit">Edit</button>
                   </Link>
+
                   <button
                     className="btn btn-delete"
                     onClick={() => deleteContact(item.id)}
                   >
                     Delete
                   </button>
+
                   <button
                     className="btn btn-edit"
                     onClick={() => changeStatus(item.id, item.cstatus)}
                   >
                     Change Status
                   </button>
+
                   <Link to={`/view/${item.id}`}>
                     <button className="btn btn-view">View</button>
                   </Link>
+
+
+                  <Link to={`/view/${item.id}`}>
+                    <button className="btn btn-view">View</button>
+                  </Link>
+
+
                 </td>
               </tr>
             );
