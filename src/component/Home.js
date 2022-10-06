@@ -12,12 +12,17 @@ import {
   ChangeStatusUtility,
 
 
+  ChangeStatusUtility,
+
+
+
 } from "../utils/ActionUtility.js";
 
 const Home = () => {
   // Define the useSate
 
   const [data, setData] = useState([]);
+  const [status, setStatus] = useState("2");
 
   // Function for information of List of contact
   const loadData = async () => {
@@ -41,6 +46,9 @@ const Home = () => {
 
   // Method for change the status
 
+
+  // Method for change the status
+
   const changeStatus = (id, sendStatus) => {
     ChangeStatusUtility(id, sendStatus);
     setTimeout(() => loadData(), 50);
@@ -49,18 +57,57 @@ const Home = () => {
 
   let LoopData = "";
 
-  LoopData = data;
+
+  const changeStatus = (id, sendStatus) => {
+    ChangeStatusUtility(id, sendStatus);
+    setTimeout(() => loadData(), 50);
+  };
+
+  const handleChangeStatus = (e) => {
+    setStatus(e.target.value);
+  };
+
+
+  let LoopData = "";
+  if (status) {
+    if (parseInt(status) === 2) {
+      LoopData = data;
+    } else if (parseInt(status) === 0) {
+      LoopData = data.filter((item) => parseInt(item.cstatus) === 0);
+    } else if (parseInt(status) === 1) {
+      LoopData = data.filter((item) => parseInt(item.cstatus) === 1);
+    }
+  } else {
+    LoopData = data;
+  }
 
   return (
     <div style={{ marginTop: "50px" }}>
       <Link to="/addcontact">
         <button
           className="btn btn-contact"
+
+          style={{ float: "left", marginLeft: "21%" }}
+
           style={{ float: "left", marginLeft: "16%" }}
+
         >
           Add Contact
         </button>
       </Link>
+
+      <label htmlFor="changestatusFilter">Status Filter</label>
+      <select
+        id="changestatusFilter"
+        style={{ width: "12%" }}
+        onChange={handleChangeStatus}
+      >
+        <option value="2">All</option>
+        <option value="0">Not Completed</option>
+        <option value="1">Completed</option>
+      </select>
+
+
       <table className="styled-table">
         <thead>
           <tr>
@@ -103,6 +150,12 @@ const Home = () => {
                   <Link to={`/view/${item.id}`}>
                     <button className="btn btn-view">View</button>
                   </Link>
+
+
+                  <Link to={`/view/${item.id}`}>
+                    <button className="btn btn-view">View</button>
+                  </Link>
+
 
                 </td>
               </tr>

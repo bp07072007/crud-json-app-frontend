@@ -8,6 +8,10 @@ import AddEdit from "./component/AddEdit";
 import View from "./component/View";
 
 
+import View from "./component/View";
+
+
+
 function App() {
   return (
     <Router>
@@ -22,12 +26,17 @@ function App() {
 
 
           <Route path="/update/:id" element={<AddEdit />} />
+          <Route path="/view/:id" element={<View />} />
 
 
           <Route path="/update/:id" element={<AddEdit />} />
 
 
           <Route path="/update/:id" element={<AddEdit />} />
+
+
+          <Route path="/update/:id" element={<AddEdit />} />
+
 
 
 

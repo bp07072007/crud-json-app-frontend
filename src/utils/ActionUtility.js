@@ -85,7 +85,3 @@ export const LoadDataSingleContact = async (id) => {
   return resp.data.data.Contact;
 };
 
-
-
-
-
