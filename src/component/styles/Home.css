@@ -45,6 +45,11 @@
 .btn-edit{
     background-color: #008cba;
 }
+.btn-disable{
+    background-color: #ddd;
+    color: #ccc;
+    cursor:not-allowed
+}
 .btn-delete{
     background-color: #f44336;
 }

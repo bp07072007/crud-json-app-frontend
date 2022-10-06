@@ -20,9 +20,11 @@ export const AddNewContactAction = async (cname, email, contact) => {
       email,
       contact,
     })
-    .then(() => {})
+    .then(() => {
+      toast.success("Contact added successfully");
+    })
     .catch((err) => toast.error(err.response.data));
-  toast.success("Contact added successfully");
+  
 };
 
 
