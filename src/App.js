@@ -7,14 +7,13 @@ import AddEdit from "./component/AddEdit";
 
 import View from "./component/View";
 
-
 function App() {
   return (
     <Router>
       <div className="App">
         <ToastContainer position="top-center" />
         <Routes>
-        <Route path="/" element={<Home />} />
+          <Route path="/" element={<Home />} />
           <Route path="/addcontact" element={<AddEdit />} />
           <Route path="/update/:id" element={<AddEdit />} />
           <Route path="/view/:id" element={<View />} />
