@@ -10,7 +10,6 @@ const View = () => {
 
   const DataSingle = async (id) => {
     const response = await LoadDataSingleContact(id);
-
     setUser(response);
   };
 

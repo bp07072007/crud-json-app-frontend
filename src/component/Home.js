@@ -1,28 +1,30 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { Link } from "react-router-dom";
 import "./styles/Home.css";
+
+import Pagination from "../pagination/Pagination";
 
 import {
   ContactDataList,
   DeleteContactRecord,
-
   ChangeStatusUtility,
-
-
-
 } from "../utils/ActionUtility.js";
 
+const PageSize = process.env.REACT_APP_PAGESIZE;
+
+// Component for listing the contact
 const Home = () => {
   // Define the useSate
 
   const [data, setData] = useState([]);
   const [status, setStatus] = useState("2");
+  const [currentPage, setCurrentPage] = useState(1);
 
   // Function for information of List of contact
   const loadData = async () => {
     const response = await ContactDataList();
-    console.log(response);
-    setData(response.data.data.Contact);
+
+    setData(response.data.data.Contact.reverse());
   };
 
   useEffect(() => {
@@ -30,7 +32,6 @@ const Home = () => {
   }, []);
 
   // Deleting the contact from database
-
   const deleteContact = (id) => {
     if (window.confirm("Are you sure to delete the contact ?")) {
       DeleteContactRecord(id);
@@ -49,7 +50,6 @@ const Home = () => {
     setStatus(e.target.value);
   };
 
-
   let LoopData = "";
   if (status) {
     if (parseInt(status) === 2) {
@@ -63,13 +63,19 @@ const Home = () => {
     LoopData = data;
   }
 
+  const currentTableData = useMemo(() => {
+    const firstPageIndex = (currentPage - 1) * PageSize;
+    const lastPageIndex = firstPageIndex + PageSize;
+    return LoopData.slice(firstPageIndex, lastPageIndex);
+  }, [currentPage, LoopData]);
+
   return (
     <div style={{ marginTop: "50px" }}>
       <Link to="/addcontact">
         <button
           className="btn btn-contact"
-
-          style={{ float: "left", marginLeft: "21%" }}       >
+          style={{ float: "left", marginLeft: "21%" }}
+        >
           Add Contact
         </button>
       </Link>
@@ -97,7 +103,7 @@ const Home = () => {
           </tr>
         </thead>
         <tbody>
-          {LoopData.map((item, index) => {
+          {currentTableData.map((item, index) => {
             return (
               <tr key={item.id}>
                 <th scope="row">{index + 1}</th>
@@ -106,13 +112,15 @@ const Home = () => {
                 <td>{item.contact}</td>
                 <td>{item.cstatus === 0 ? "Not Completed" : "Completed"}</td>
                 <td>
-                  {!item.cstatus ?  
-                   <Link to={`/update/${item.id}`}>
-                    <button className="btn btn-edit">Edit</button>
-                  </Link> : 
-                    <button className="btn btn-disable" disabled>Edit</button>
-                  }
-                 
+                  {!item.cstatus ? (
+                    <Link to={`/update/${item.id}`}>
+                      <button className="btn btn-edit">Edit</button>
+                    </Link>
+                  ) : (
+                    <button className="btn btn-disable" disabled>
+                      Edit
+                    </button>
+                  )}
 
                   <button
                     className="btn btn-delete"
@@ -131,17 +139,21 @@ const Home = () => {
                   <Link to={`/view/${item.id}`}>
                     <button className="btn btn-view">View</button>
                   </Link>
-
-
-                 
-
-
                 </td>
               </tr>
             );
           })}
         </tbody>
       </table>
+      <div className="paginationposition">
+        <Pagination
+          className="pagination-bar"
+          currentPage={currentPage}
+          totalCount={LoopData.length}
+          pageSize={PageSize}
+          onPageChange={(page) => setCurrentPage(page)}
+        />
+      </div>
     </div>
   );
 };

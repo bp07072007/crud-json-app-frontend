@@ -11,7 +11,7 @@ import {
 } from "../utils/ActionUtility.js";
 import { initialState } from "../utils/InitialState.js";
 
-// intialised the field value
+// Component for Add edit the contact
 
 const AddEdit = () => {
   // Define the useSate
@@ -23,10 +23,10 @@ const AddEdit = () => {
 
   // Function for setting the partucular contact detail
   const DataSingleEdit = async (id) => {
-    if(id){
-    const response = await LoadDataSingleEdit(id);
-    setState(response);
-  }
+    if (id) {
+      const response = await LoadDataSingleEdit(id);
+      setState(response);
+    }
   };
 
   // Fetch the information of particular ID contact
@@ -35,7 +35,6 @@ const AddEdit = () => {
   }, [id]);
 
   // Add the contact information after submitting below
-
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -44,7 +43,7 @@ const AddEdit = () => {
     } else {
       if (!id) {
         // API for adding the contact information into database
-      AddNewContactAction(cname, email, contact);
+        AddNewContactAction(cname, email, contact);
         setState(initialState);
       } else {
         // API fro Updating the contact information into database
@@ -52,7 +51,6 @@ const AddEdit = () => {
         EditContactAction(id, cname, email, contact);
         setState(initialState);
       }
-
 
       // After submission the URL redirect to listing contact page
       setTimeout(() => navigate("/"), 50);
@@ -104,7 +102,7 @@ const AddEdit = () => {
           onChange={handleInputChange}
         />
         <input type="submit" value={id ? "Update" : "Save"} />
-       
+
         <Link to="/">
           <input type="button" value="Go Back" />
         </Link>
