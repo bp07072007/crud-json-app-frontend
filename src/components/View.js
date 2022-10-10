@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
-import "./styles/View.css";
+import { ColorRing } from "react-loader-spinner";
+import "../assets/styles/View.css";
 import { LoadDataSingleContact } from "../utils/ActionUtility.js";
 
 const View = () => {
   // Define the useSate
   const [user, setUser] = useState({});
+  const [visibility, setvisibility] = useState(true);
   const { id } = useParams();
 
   const DataSingle = async (id) => {
@@ -15,7 +17,9 @@ const View = () => {
 
   // Get Access API for information of particular ID contact
   useEffect(() => {
-    DataSingle(id);
+    DataSingle(id).then(() => {
+      setvisibility(false);
+    });
   }, [id]);
 
   return (
@@ -75,10 +79,19 @@ const View = () => {
           <br />
           <br />
           <Link to="/">
-            <div className="btn btn-edit">Go Back</div>
+            <div className="btn btn-view-detail">Go Back</div>
           </Link>
         </div>
       </div>
+      <ColorRing
+        visible={visibility}
+        height="80"
+        width="80"
+        ariaLabel="blocks-loading"
+        wrapperStyle={{}}
+        wrapperClass="blocks-wrapper"
+        colors={["#b8c480", "#B2A3B5", "#F4442E", "#51E5FF", "#429EA6"]}
+      />
     </div>
   );
 };

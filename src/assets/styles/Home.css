@@ -43,7 +43,7 @@
 }
 
 .btn-edit{
-    background-color: #008cba;
+    background-color: green;
 }
 .btn-disable{
     background-color: #ddd;
@@ -54,12 +54,23 @@
     background-color: #f44336;
 }
 
+.btn-confirm-delete{
+    background-color: #f44336;
+    margin-top: 11%;
+    margin-right: 23%;
+}
+
 .btn-view{
+    background-color: #e7e7e7;
+    color: black;
+}
+.btn-confirm-view{
+    margin-top: 20px;
     background-color: #e7e7e7;
     color: black;
 }
 
 .btn-contact{
-    background-color: #e82764;
+    background-color: gray;
     margin-bottom: 10px;
 }

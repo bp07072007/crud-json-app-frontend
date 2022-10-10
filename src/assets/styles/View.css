@@ -2,7 +2,7 @@
     width: 30%;
     display: flex;
     flex-direction: column;
-    border: 1px red solid;
+    border: 1px #5d6770 solid;
     align-content: center;
     margin: 0 auto;
 }
@@ -50,4 +50,10 @@
 
 .styled-table tbody tr:last-of-type{
     border-bottom: 2px solid #009879;
+}
+
+.btn-view-detail{
+    background-color: black;
+    margin-bottom: 10px;
+    color: #fff;
 }
