@@ -21,7 +21,10 @@ export const AddNewContactAction = async (cname, email, contact) => {
       contact,
     })
     .then(() => {
-      toast.success("Contact added successfully");
+      toast.success("Contact added successfully", {
+        position: toast.POSITION.TOP_RIGHT
+    });
+      return "success";
     })
     .catch((err) => toast.error(err.response.data));
 };
@@ -36,9 +39,16 @@ export const EditContactAction = async (id, cname, email, contact) => {
       email,
       contact,
     })
-    .then(() => {})
-    .catch((err) => toast.error(err.response.data));
-  toast.success("Contact updated successfully");
+    .then(() => {
+      toast.success("Contact updated successfully", {
+        position: toast.POSITION.TOP_RIGHT
+    });
+      return "success";
+    })
+    .catch((err) => toast.error(err.response.data), {
+      position: toast.POSITION.TOP_RIGHT
+  });
+ 
 };
 
 // Fetch the information of particular ID contact
@@ -53,9 +63,18 @@ export const LoadDataSingleEdit = async (id) => {
 
 // Deleting the contact from database
 
-export const DeleteContactRecord = (id) => {
-  axios.delete(`${process.env.REACT_APP_SERVER_PATH}/api/delete/${id}`);
-  toast.success("Contact deleted succesfully");
+export async function DeleteContactRecord  (id){
+  const response = await axios.delete(`${process.env.REACT_APP_SERVER_PATH}/api/delete/${id}`);
+  if (response.statusText === "OK") {
+    toast.success("Contact deleted succesfully", {
+      position: toast.POSITION.TOP_RIGHT
+  });
+  } else {
+    toast.success("Contact not deleted", {
+      position: toast.POSITION.TOP_RIGHT
+  });
+  }
+  return response
 };
 
 // Method for change the status
@@ -67,7 +86,9 @@ export const ChangeStatusUtility = (id, sendStatus) => {
       id,
     })
     .then(() => {
-      toast.success("Contact status updated successfully");
+      toast.success("Contact status updated successfully", {
+        position: toast.POSITION.TOP_RIGHT
+    });
     })
     .catch((err) => toast.error(err.response.data));
 };

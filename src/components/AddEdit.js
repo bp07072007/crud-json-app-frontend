@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useParams, Link } from "react-router-dom";
+import { ColorRing } from "react-loader-spinner";
 
-import "./styles/AddEdit.css";
+import "../assets/styles/AddEdit.css";
 import { toast } from "react-toastify";
 
 import {
@@ -17,6 +18,8 @@ const AddEdit = () => {
   // Define the useSate
   const [state, setState] = useState(initialState);
   const { cname, email, contact } = state;
+  const [visibility, setvisibility] = useState(false);
+
   const navigate = useNavigate();
 
   const { id } = useParams();
@@ -35,25 +38,34 @@ const AddEdit = () => {
   }, [id]);
 
   // Add the contact information after submitting below
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-
+    setvisibility(true);
     if (!cname || !email || !contact) {
-      toast.error("Please provide value into each input field");
+      toast.error("Please provide value into each input field", {
+        position: toast.POSITION.TOP_RIGHT
+    });
+    setvisibility(false);
     } else {
       if (!id) {
         // API for adding the contact information into database
-        AddNewContactAction(cname, email, contact);
-        setState(initialState);
+        const response = await AddNewContactAction(cname, email, contact);
+        if (response === "success") {
+          setState(initialState);
+          setvisibility(false);
+        }
       } else {
         // API fro Updating the contact information into database
 
-        EditContactAction(id, cname, email, contact);
-        setState(initialState);
+        const response = await EditContactAction(id, cname, email, contact);
+        if (response === "success") {
+          setState(initialState);
+          setvisibility(false);
+        }
       }
 
       // After submission the URL redirect to listing contact page
-      setTimeout(() => navigate("/"), 50);
+      setTimeout(() => navigate("/"), 500);
     }
   };
 
@@ -65,6 +77,7 @@ const AddEdit = () => {
 
   return (
     <div style={{ marginTop: "50px" }}>
+      <h2>{id ? "Edit Contact Detail" : "Add Contact Detail"}</h2>
       <form
         style={{
           margin: "auto",
@@ -94,7 +107,7 @@ const AddEdit = () => {
         />
         <label htmlFor="contact">Contact</label>
         <input
-          type="number"
+          type="text"
           id="contact"
           name="contact"
           placeholder="Your Contact No ..."
@@ -107,6 +120,16 @@ const AddEdit = () => {
           <input type="button" value="Go Back" />
         </Link>
       </form>
+
+      <ColorRing
+        visible={visibility}
+        height="80"
+        width="80"
+        ariaLabel="blocks-loading"
+        wrapperStyle={{}}
+        wrapperClass="blocks-wrapper"
+        colors={["#b8c480", "#B2A3B5", "#F4442E", "#51E5FF", "#429EA6"]}
+      />
     </div>
   );
 };
