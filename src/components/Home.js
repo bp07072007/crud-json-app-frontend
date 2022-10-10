@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useMemo } from "react";
 import { Link } from "react-router-dom";
 import { ColorRing } from "react-loader-spinner";
-import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
-import Modal from '@mui/material/Modal';
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
+import Modal from "@mui/material/Modal";
 
 import "../assets/styles/Home.css";
 
@@ -18,13 +18,13 @@ import {
 const PageSize = process.env.REACT_APP_PAGESIZE;
 
 const style = {
-  position: 'absolute' ,
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
   width: 400,
-  bgcolor: 'background.paper',
-  border: '2px solid #000',
+  bgcolor: "background.paper",
+  border: "2px solid #000",
   boxShadow: 24,
   p: 4,
 };
@@ -37,20 +37,20 @@ const Home = () => {
   const [status, setStatus] = useState("2");
   const [currentPage, setCurrentPage] = useState(1);
   const [visibility, setvisibility] = useState(true);
-  const [open,handleOpen] = useState(false);
-  const [getId,setId] = useState('');
+  const [open, handleOpen] = useState(false);
+  const [getId, setId] = useState("");
 
   // Close modal action
 
-  const handleClose = ()=>{
+  const handleClose = () => {
     handleOpen(false);
-  }
+  };
 
   // Handle the Deleted section
-  const handleOpensec = (id)=>{
+  const handleOpensec = (id) => {
     handleOpen(true);
     setId(id);
-  }
+  };
 
   // Function for information of List of contact
   const loadData = async () => {
@@ -61,7 +61,7 @@ console.log(response.data.data.Contact);
   };
 
   useEffect(() => {
-    loadData().then(()=>{
+    loadData().then(() => {
       setvisibility(false);
     });
   }, []);
@@ -69,11 +69,11 @@ console.log(response.data.data.Contact);
   // Deleting the contact from database
   const deleteContact = async (id) => {
     setvisibility(true);
-   
-      await DeleteContactRecord(id);
 
-      setTimeout(() => loadData(), 500);
-      handleOpen(false);
+    await DeleteContactRecord(id);
+
+    setTimeout(() => loadData(), 500);
+    handleOpen(false);
     setvisibility(false);
   };
 
@@ -107,10 +107,10 @@ console.log(response.data.data.Contact);
   const currentTableData = useMemo(() => {
     const firstPageIndex = (currentPage - 1) * PageSize;
     const lastPageIndex = firstPageIndex + PageSize;
-    if(LoopData.length%10===0){
+    if (LoopData.length % 10 === 0) {
       return LoopData;
-    }else{
-    return LoopData.slice(firstPageIndex, lastPageIndex);
+    } else {
+      return LoopData.slice(firstPageIndex, lastPageIndex);
     }
   }, [currentPage, LoopData]);
 
@@ -211,23 +211,28 @@ console.log(response.data.data.Contact);
       </div>
 
       <Modal
-  open={open}
-  onClose={handleClose}
-  aria-labelledby="modal-modal-title"
-  aria-describedby="modal-modal-description"
->
-  
-  <Box sx={style}>
-    <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-    Are you sure to delete the contact ?
-    </Typography>
-    <Typography id="modal-modal-title" variant="h6" component="h2">
-     <button  className="btn btn-confirm-delete" onClick={() => deleteContact(getId)}  >Delete</button>
-     <button className="btn btn-confirm-view"  onClick={handleClose} >Close</button>
-    </Typography>
-    
-  </Box>
-</Modal>
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={style}>
+          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+            Are you sure to delete the contact ?
+          </Typography>
+          <Typography id="modal-modal-title" variant="h6" component="h2">
+            <button
+              className="btn btn-confirm-delete"
+              onClick={() => deleteContact(getId)}
+            >
+              Delete
+            </button>
+            <button className="btn btn-confirm-view" onClick={handleClose}>
+              Close
+            </button>
+          </Typography>
+        </Box>
+      </Modal>
     </div>
   );
 };
