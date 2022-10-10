@@ -55,7 +55,6 @@ const Home = () => {
   // Function for information of List of contact
   const loadData = async () => {
     const response = await ContactDataList();
-console.log(response.data.data.Contact);
     setData(response.data.data.Contact.reverse());
     
   };
